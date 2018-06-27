@@ -1,0 +1,29 @@
+{% extends 'climbing/base.html' %}
+{% block title %} Compétitions {% endblock title %}
+
+{% block content %}
+{% if latest_competition_list %}
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Compétition</th>
+      <th>Date</th>
+      <th>Lieu</th>
+      <th>Catégories</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for competition in latest_competition_list %}
+    <tr>
+      <td><a href="{% url 'climbing:results' competition.id %}">{{ competition.title }}</a></td>
+      <td>{{ competition.date|date:"j M Y (l)" }}</td>
+      <td>{{ competition.location }}</td>
+      <td>{% for c in competition.categories.all %}{{c.code}}, {% endfor %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Aucune compétition</p>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,32 @@
+{% extends 'climbing/base.html' %}
+{% block title %} {{ competition.title }} {% endblock title %}
+
+{% block content %}
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th scope="col">Ranking</th>
+			<th scope="col">Athlete</th>
+			{% for b in competition.boulder_set.all %}
+			<th scope="col">{{ b.number }}</th>
+			{% endfor %}
+			<th scope="col">TOPS</th>
+			<th scope="col">Score</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for r in results %}
+	<tr>
+		<th scope="row">{{ r.ranking }}</th>
+		<td><a href="{% url 'climbing:athlete_results' competition.id r.athlete.id %}">{{r.athlete}}</a></td>
+		{% for item in r.boulders %}
+			<td>{{ item }}</td>
+		{% endfor %}
+		<td>{{ r.tops }}</td>
+		<td>{{ r.score|floatformat }}</td>
+	</tr>
+	{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+<h1>{{ competition.title }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% for athlete in competition.athlete_set.all %}
+<h2>{{ athlete }}</h2>
+
+<form action="{% url 'climbing:encode' competition.id %}" method="post">
+{% csrf_token %}
+	<input type="text" name="boulder" id="boulder" value="" />
+	<input type="text" name="result" id="result" value="" />
+	<input type="hidden", name="athlete", id="athlete", value="{{athlete.id}}" />
+	<input type="submit" value="Encode" />
+</form>
+
+
+{% endfor %}

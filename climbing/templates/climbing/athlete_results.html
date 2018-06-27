@@ -1,0 +1,23 @@
+{% extends 'climbing/base.html' %}
+{% block title %} {{ competition.title }} {% endblock title %}
+{% block content %}
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Athlete</th>
+			{% for b in competition.boulder_set.all %}
+			<th>{{ b.number }}</th>
+			{% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{ athlete }}</td>
+			{% for r in results %}
+			<td>{{r}}</td>
+			{% endfor %}
+		</tr>
+	</tbody>
+</table>
+
+{% endblock %}

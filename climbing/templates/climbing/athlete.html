@@ -1,0 +1,19 @@
+{% extends 'climbing/base.html' %}
+{% block title %} {{ athlete }} {% endblock title %}
+
+{% block content %}
+<ul>
+  <li>Date de naissance: {{ athlete.birthdate|date:"j F Y" }}</li>
+  <li>Genre: {{ athlete.get_gender_display }}</li>
+  <li>Nationalité: {{ athlete.nationality }}</li>
+  <li>Club: {{ athlete.club }}</li>
+</ul>
+
+<h2>Compétitions</h2>
+<ul>
+  {% for c in athlete.competitions.all %}
+  <li><a href="{% url 'competition:results' c.id  %}">{{ c }}</a></li>
+  {% endfor %}
+</ul>
+
+{% endblock content %}

@@ -1,0 +1,20 @@
+*.log
+__pycache__
+*.pyc
+# default database for any django project
+db.sqlite3
+
+# Specific for secret configuration parameters
+*.secret
+# backup, and autosave
+*~
+*.swp
+*.bak
+
+# Mac finder files and hidden folders
+.DS_Store
+#seems used to store extended file information: icon, time machine status...
+._*
+
+# Secific for OBE laptop
+Zone.sav

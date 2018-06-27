@@ -1,0 +1,31 @@
+{% extends 'climbing/base.html' %}
+{% block title %} Athlètes {% endblock title %}
+
+{% block content %}
+{% if athletes %}
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Nom et prénom</th>
+      <th>Genre</th>
+      <th>Date de naissance</th>
+      <th>Nationalité</th>
+      <th>Club</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for athlete in athletes %}
+    <tr>
+      <td><a href="{% url 'climbing:athlete' athlete.id %}">{{ athlete.firstname }}  {{ athlete.lastname }}</a></td>
+      <td>{{ athlete.gender }}</td>
+      <td>{{ athlete.birthdate }}</td>
+      <td>{{ athlete.nationality }}</td>
+      <td>{{ athlete.club }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Aucun athlète</p>
+{% endif %}
+{% endblock content %}
