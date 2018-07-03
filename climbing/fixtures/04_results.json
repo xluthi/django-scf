@@ -1,0 +1,119 @@
+[
+{
+   "model": "climbing.result",
+   "pk": 1,
+   "fields": {
+      "competitor": 1,
+      "boulder": 1,
+      "result": 2
+   }
+},
+{
+   "model": "climbing.result",
+   "pk": 2,
+   "fields": {
+      "competitor": 1,
+      "boulder": 2,
+      "result": 2
+   }
+},
+{
+   "model": "climbing.result",
+   "pk": 3,
+   "fields": {
+      "competitor": 1,
+      "boulder": 3,
+      "result": 2
+   }
+},
+{
+   "model": "climbing.result",
+   "pk": 4,
+   "fields": {
+      "competitor": 1,
+      "boulder": 4,
+      "result": 2
+   }
+},
+{
+   "model": "climbing.result",
+   "pk": 5,
+   "fields": {
+      "competitor": 4,
+      "boulder": 5,
+      "result": 2
+   }
+},
+{
+   "model": "climbing.result",
+   "pk": 6,
+   "fields": {
+      "competitor": 4,
+      "boulder": 6,
+      "result": 1
+   }
+},
+{
+   "model": "climbing.result",
+   "pk": 7,
+   "fields": {
+      "competitor": 4,
+      "boulder": 1,
+      "result": 2
+   }
+},
+{
+   "model": "climbing.result",
+   "pk": 8,
+   "fields": {
+      "competitor": 4,
+      "boulder": 2,
+      "result": 2
+   }
+},
+{
+   "model": "climbing.result",
+   "pk": 9,
+   "fields": {
+      "competitor": 4,
+      "boulder": 3,
+      "result": 2
+   }
+},
+{
+   "model": "climbing.result",
+   "pk": 10,
+   "fields": {
+      "competitor": 4,
+      "boulder": 4,
+      "result": 2
+   }
+},
+{
+   "model": "climbing.result",
+   "pk": 11,
+   "fields": {
+      "competitor": 2,
+      "boulder": 1,
+      "result": 2
+   }
+},
+{
+   "model": "climbing.result",
+   "pk": 12,
+   "fields": {
+      "competitor": 2,
+      "boulder": 3,
+      "result": 2
+   }
+},
+{
+   "model": "climbing.result",
+   "pk": 13,
+   "fields": {
+      "competitor": 3,
+      "boulder": 3,
+      "result": 2
+   }
+}
+]

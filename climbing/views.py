@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Competition, Result, Athlete
+from .models import Competition, Result, Athlete, Competitor
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
@@ -26,22 +26,22 @@ def detail(request, competition_id):
 
 def results(request, competition_id):
     competition = get_object_or_404(Competition, pk=competition_id)
-    athletes = competition.athlete_set.all()
+    competitors = competition.competitor_set.all()
     boulders = competition.boulder_set.all()
     r = []
-    for a in athletes:
+    for competitor in competitors:
         ra = {}
-        ra['athlete'] = a
+        ra['competitor'] = competitor
         # ra.append(str(a))
         tops = 0
         total_score = 0
         boulder_results = []
         for b in boulders:
-            score = Result.objects.get_result(athlete=a, boulder=b).result
+            score = Result.objects.get_result(competitor=competitor, boulder=b).result
             boulder_results.append(score)
             if score == 2:
                 tops += 1
-                total_score += b.value()
+                total_score += b.value
         ra['boulders'] = boulder_results
         ra['tops'] = tops
         ra['score'] = total_score
@@ -57,22 +57,22 @@ def results(request, competition_id):
 
     context = {
         'competition': competition,
-        'athletes'   : athletes,
+        'competitors'   : competitors,
         'boulders'   : boulders,
         'results'    : r,
     }
     return render(request, 'climbing/results.html', context)
 
-def athlete_results(request, competition_id, athlete_id):
+def athlete_results(request, competition_id, competitor_id):
         competition = get_object_or_404(Competition, pk=competition_id)
         boulders = competition.boulder_set.all()
-        athlete = get_object_or_404(Athlete, pk=athlete_id)
+        competitor = get_object_or_404(Competitor, pk=competitor_id)
         r = []
         for b in boulders:
-            r.append(Result.objects.get_result(athlete=athlete, boulder=b).result)
+            r.append(Result.objects.get_result(competitor=competitor, boulder=b).result)
         context = {
             'competition': competition,
-            'athlete'   : athlete,
+            'competitor'   : competitor,
             'results': r,
         }
         return render(request, 'climbing/athlete_results.html', context)

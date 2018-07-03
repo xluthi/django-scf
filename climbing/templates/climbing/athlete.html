@@ -11,8 +11,8 @@
 
 <h2>Compétitions</h2>
 <ul>
-  {% for c in athlete.competitions.all %}
-  <li><a href="{% url 'competition:results' c.id  %}">{{ c }}</a></li>
+  {% for c in athlete.competitor_set.all %}
+  <li><a href="{% url 'climbing:results' c.competition.id  %}">{{ c.competition }}</a></li>
   {% endfor %}
 </ul>
 

@@ -18,7 +18,7 @@
 	{% for r in results %}
 	<tr>
 		<th scope="row">{{ r.ranking }}</th>
-		<td><a href="{% url 'climbing:athlete_results' competition.id r.athlete.id %}">{{r.athlete}}</a></td>
+		<td><a href="{% url 'climbing:athlete' r.competitor.id %}">{{r.competitor.athlete}}</a></td>
 		{% for item in r.boulders %}
 			<td>{{ item }}</td>
 		{% endfor %}

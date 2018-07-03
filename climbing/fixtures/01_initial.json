@@ -1,0 +1,75 @@
+[
+{
+  "model": "climbing.category",
+  "pk": 1,
+  "fields": {
+    "code": "A",
+    "description": "A (under 18)"
+  }
+},
+{
+  "model": "climbing.category",
+  "pk": 2,
+  "fields": {
+    "code": "B",
+    "description": "B (under 16)"
+  }
+},
+{
+  "model": "climbing.category",
+  "pk": 3,
+  "fields": {
+    "code": "C",
+    "description": "C (under 14)"
+  }
+},
+{
+  "model": "climbing.category",
+  "pk": 4,
+  "fields": {
+    "code": "D",
+    "description": "D (under 12)"
+  }
+},
+{
+  "model": "climbing.category",
+  "pk": 5,
+  "fields": {
+    "code": "AD",
+    "description": "Adultes"
+  }
+},
+{
+  "model": "climbing.category",
+  "pk": 6,
+  "fields": {
+    "code": "ENF",
+    "description": "Enfants"
+  }
+},
+{
+  "model": "climbing.category",
+  "pk": 7,
+  "fields": {
+    "code": "J",
+    "description": "Junior (under 20)"
+  }
+},
+{
+  "model": "climbing.category",
+  "pk": 8,
+  "fields": {
+    "code": "S",
+    "description": "Senior"
+  }
+},
+{
+   "model": "climbing.club",
+   "pk": 1,
+   "fields": {
+      "name": "Stone Climbing Factory",
+      "city": "Bruxelles",
+      "gym": "Stone Age"
+   }
+}
+]

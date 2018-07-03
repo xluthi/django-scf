@@ -1,0 +1,100 @@
+[
+{
+   "model": "climbing.athlete",
+   "pk": 1,
+   "fields": {
+      "lastname": "L\u00fcthi",
+      "firstname": "Antonin",
+      "gender": "M",
+      "birthdate": "2006-11-19",
+      "club": 1,
+      "nationality": "BEL"
+   }
+},
+{
+   "model": "climbing.competitor",
+   "pk": 1,
+   "fields": {
+      "athlete": 1,
+      "competition": 2,
+      "category": 3,
+      "dossard": "100"
+   }
+},
+{
+   "model": "climbing.athlete",
+   "pk": 2,
+   "fields": {
+      "lastname": "De Vocht",
+      "firstname": "Gladys",
+      "gender": "F",
+      "birthdate": "2005-01-01",
+      "club": 1,
+      "nationality": "BEL"
+   }
+},
+{
+   "model": "climbing.competitor",
+   "pk": 2,
+   "fields": {
+      "athlete": 2,
+      "competition": 2,
+      "category": 2,
+      "dossard": "101"
+   }
+},
+{
+   "model": "climbing.athlete",
+   "pk": 3,
+   "fields": {
+      "lastname": "Depotter",
+      "firstname": "L\u00e9a",
+      "gender": "F",
+      "birthdate": "2005-01-01",
+      "club": 1,
+      "nationality": "BEL"
+   }
+},
+{
+   "model": "climbing.competitor",
+   "pk": 3,
+   "fields": {
+      "athlete": 3,
+      "competition": 2,
+      "category": 2,
+      "dossard": "102"
+   }
+},
+{
+   "model": "climbing.athlete",
+   "pk": 4,
+   "fields": {
+      "lastname": "Colin",
+      "firstname": "Nicolas",
+      "gender": "M",
+      "birthdate": "2005-01-01",
+      "club": 1,
+      "nationality": "BEL"
+   }
+},
+{
+   "model": "climbing.competitor",
+   "pk": 4,
+   "fields": {
+      "athlete": 4,
+      "competition": 2,
+      "category": 7,
+      "dossard": "201"
+   }
+},
+{
+    "model": "climbing.competitor",
+    "pk": 5,
+    "fields": {
+        "athlete": 4,
+        "competition": 1,
+        "category": 7,
+        "dossard": 10
+    }
+}
+]

@@ -1,0 +1,103 @@
+[
+{
+   "model": "climbing.competition",
+   "pk": 1,
+   "fields": {
+      "code": "EYCH18",
+      "title": "European Youth Boulder Championship 2018",
+      "date": "2018-08-31",
+      "description": "",
+      "location": "Parc du Cinquantenaire, Bruxelles",
+      "min_boulder_nbr": 1,
+      "max_boulder_nbr": 10,
+      "categories": [
+         1,
+         2,
+         7
+      ]
+   }
+},
+{
+   "model": "climbing.competition",
+   "pk": 2,
+   "fields": {
+      "code": "SCF1",
+      "title": "Boulder Session SCF",
+      "date": "2018-09-16",
+      "description": "",
+      "location": "Stone Age",
+      "min_boulder_nbr": 1,
+      "max_boulder_nbr": 40,
+      "categories": [
+         5,
+         6
+      ]
+   }
+},
+{
+   "model": "climbing.boulder",
+   "pk": 1,
+   "fields": {
+      "number": 1,
+      "description": "C'est pas du Pico",
+      "top_value": 1000,
+      "zone_value": 0,
+      "competition": 2
+   }
+},
+{
+   "model": "climbing.boulder",
+   "pk": 2,
+   "fields": {
+      "number": 2,
+      "description": "Le grand bleu",
+      "top_value": 1000,
+      "zone_value": 0,
+      "competition": 2
+   }
+},
+{
+   "model": "climbing.boulder",
+   "pk": 3,
+   "fields": {
+      "number": 3,
+      "description": "Lolottite aig\u00fce",
+      "top_value": 1000,
+      "zone_value": 0,
+      "competition": 2
+   }
+},
+{
+   "model": "climbing.boulder",
+   "pk": 4,
+   "fields": {
+      "number": 4,
+      "description": "Ca gaine",
+      "top_value": 1000,
+      "zone_value": 0,
+      "competition": 2
+   }
+},
+{
+   "model": "climbing.boulder",
+   "pk": 5,
+   "fields": {
+      "number": 1,
+      "description": "A-1",
+      "top_value": 1000,
+      "zone_value": 500,
+      "competition": 1
+   }
+},
+{
+   "model": "climbing.boulder",
+   "pk": 6,
+   "fields": {
+      "number": 2,
+      "description": "A-2",
+      "top_value": 1000,
+      "zone_value": 500,
+      "competition": 1
+   }
+}
+]
