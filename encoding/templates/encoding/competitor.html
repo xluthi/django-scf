@@ -16,9 +16,13 @@
     <tr>
       <td>{{ result.boulder }}</td>
       <td>
-        <a class="btn btn-{% if result.result != 0 %}outline-{% endif %}danger" href="#" role="button">raté</a>
-        <a class="btn btn-{% if result.result != 1 %}outline-{% endif %}primary" href="#" role="button">zone</a>
-        <a class="btn btn-{% if result.result != 2 %}outline-{% endif %}success" href="#" role="button">TOP</a>
+        <form action="{% url 'encoding:encode' competition.id competitor.id %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="boulder" value="{{ result.boulder.id }}">
+          <button type="submit" name="submit" value="0" class="btn btn-{% if result.result != 0 %}outline-{% endif %}danger">raté</button>
+          <button type="submit" name="submit" value="1" class="btn btn-{% if result.result != 1 %}outline-{% endif %}primary">zone</button>
+          <button type="submit" name="submit" value="2" class="btn btn-{% if result.result != 2 %}outline-{% endif %}success">TOP</button>
+        </form>
       </td>
     </tr>
     {% endfor %}
