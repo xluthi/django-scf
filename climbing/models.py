@@ -93,6 +93,7 @@ class Competitor(models.Model):
 
     class Meta:
             unique_together = (('athlete', 'competition'), ('competition', 'dossard'))
+            ordering = ['competition', 'dossard']
     def __str__(self):
         return "{}({}) {}".format(self.dossard, self.category, self.athlete)
 
@@ -104,6 +105,8 @@ class ResultManager(models.Manager):
             print("exception catched")
             r = Result()
             r.result = 0
+            r.boulder = boulder
+            r.competitor = competitor
             return r
 
 class Result(models.Model):
@@ -119,6 +122,9 @@ class Result(models.Model):
         competitor  = models.ForeignKey(Competitor, on_delete = models.PROTECT)
         boulder     = models.ForeignKey(Boulder, on_delete = models.PROTECT)
         result      = models.PositiveSmallIntegerField(choices=RESULTS)
+        datetime    = models.DateTimeField('attempt date', auto_now_add=True)
         def __str__(self):
             return "{}, boulder: {}, result: {}".format(self.competitor, self.boulder, self.result)
         objects = ResultManager()
+        class Meta:
+            unique_together = ('competitor', 'boulder')

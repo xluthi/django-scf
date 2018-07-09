@@ -1,0 +1,27 @@
+{% extends 'climbing/base.html' %}
+{% block title %} Encoder des résultats{% endblock title %}
+
+{% block content %}
+<h2><a href="{% url 'encoding:competition' competition.id %}">{{ competition }}</a></h2>
+<h3>{{ competitor.athlete }}</h3>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Boulder</th>
+      <th>Résultat</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for result in result_set %}
+    <tr>
+      <td>{{ result.boulder }}</td>
+      <td>
+        <a class="btn btn-{% if result.result != 0 %}outline-{% endif %}danger" href="#" role="button">raté</a>
+        <a class="btn btn-{% if result.result != 1 %}outline-{% endif %}primary" href="#" role="button">zone</a>
+        <a class="btn btn-{% if result.result != 2 %}outline-{% endif %}success" href="#" role="button">TOP</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

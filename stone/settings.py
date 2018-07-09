@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'encoding.apps.EncodingConfig',
     'climbing.apps.ClimbingConfig',
     'django.contrib.admin',
     'django.contrib.auth',
