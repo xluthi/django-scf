@@ -9,7 +9,7 @@ class Category(models.Model):
     code = models.CharField("Code", max_length=3, unique=True)
     description = models.CharField("Description", max_length=50)
     def __str__(self):
-        return "{} - {}".format(self.code, self.description)
+        return self.description
     class Meta:
         verbose_name_plural = "Categories"
 
@@ -46,12 +46,11 @@ class Boulder(models.Model):
         ordering = ["number"]
         unique_together = ('competition', 'number')
 
-    @property
-    def value(self):
+    def value(self, category):
         """
         Based on the results, compute the value of the top
         """
-        return self.top_value / Result.objects.filter(boulder=self.id, result=2).count()
+        return self.top_value / Result.objects.filter(boulder=self.id, result=2, competitor__category = category).count()
 
 class Club(models.Model):
     name = models.CharField('Name', max_length=100)
@@ -95,7 +94,7 @@ class Competitor(models.Model):
             unique_together = (('athlete', 'competition'), ('competition', 'dossard'))
             ordering = ['competition', 'dossard']
     def __str__(self):
-        return "{}({}) {}".format(self.dossard, self.category, self.athlete)
+        return "{}   -   {}   -   ({})  --> {}".format(self.dossard, self.competition, self.category, self.athlete)
 
 class ResultManager(models.Manager):
     def get_result(self, competitor, boulder):

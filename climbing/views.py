@@ -26,34 +26,39 @@ def detail(request, competition_id):
 
 def results(request, competition_id):
     competition = get_object_or_404(Competition, pk=competition_id)
-    competitors = competition.competitor_set.all()
+    categories = competition.categories.all()
     boulders = competition.boulder_set.all()
     r = []
-    for competitor in competitors:
-        ra = {}
-        ra['competitor'] = competitor
-        # ra.append(str(a))
-        tops = 0
-        total_score = 0
-        boulder_results = []
-        for b in boulders:
-            score = Result.objects.get_result(competitor=competitor, boulder=b).result
-            boulder_results.append(score)
-            if score == 2:
-                tops += 1
-                total_score += b.value
-        ra['boulders'] = boulder_results
-        ra['tops'] = tops
-        ra['score'] = total_score
-        r.append(ra)
-        r.sort(key=lambda x: x['score'], reverse=True)
-        if len(r) > 0: r[0]['ranking'] = 1
-        for i in range(1,len(r)):
-            # define ranking
-            if r[i]['score'] == r[i-1]['score']:
-                r[i]['ranking'] = r[i-1]['ranking']
-            else:
-                r[i]['ranking'] = i+1
+    # create a ranking for each category
+    for category in categories:
+        res_cat = []
+        competitors = competition.competitor_set.filter(category=category.id)
+        # compute result for each competitor
+        for competitor in competitors:
+            ra = {}
+            ra['competitor'] = competitor
+            tops = 0
+            total_score = 0
+            boulder_results = []
+            for b in boulders:
+                score = Result.objects.get_result(competitor=competitor, boulder=b).result
+                boulder_results.append(score)
+                if score == 2:
+                    tops += 1
+                    total_score += b.value(category)
+            ra['boulders'] = boulder_results
+            ra['tops'] = tops
+            ra['score'] = total_score
+            res_cat.append(ra)
+            res_cat.sort(key=lambda x: x['score'], reverse=True)
+            if len(res_cat) > 0: res_cat[0]['ranking'] = 1
+            for i in range(1,len(res_cat)):
+                # define ranking, taking into account ex-aequo
+                if res_cat[i]['score'] == res_cat[i-1]['score']:
+                    res_cat[i]['ranking'] = res_cat[i-1]['ranking']
+                else:
+                    res_cat[i]['ranking'] = i+1
+        r.append({'category': category, 'results': res_cat})
 
     context = {
         'competition': competition,
