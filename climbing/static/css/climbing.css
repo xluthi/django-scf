@@ -14,3 +14,7 @@ h2 {
 .btn-space-left {
   margin-left: 20px;
 }
+
+.btn-group-padding {
+  padding: 10px 0;
+}
