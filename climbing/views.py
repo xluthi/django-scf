@@ -41,9 +41,9 @@ def results(request, competition_id):
             total_score = 0
             boulder_results = []
             for b in boulders:
-                score = Result.objects.get_result(competitor=competitor, boulder=b).result
+                score = Result.objects.get_result(competitor=competitor, boulder=b).get_result_display()
                 boulder_results.append(score)
-                if score == 2:
+                if score == 'top':
                     tops += 1
                     total_score += b.value(category)
             ra['boulders'] = boulder_results

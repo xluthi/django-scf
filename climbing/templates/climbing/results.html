@@ -4,8 +4,8 @@
 {% block content %}
 {% for res_cat in results %}
 <h2>{{ res_cat.category }}</h2>
-<table class="table table-striped table-bordered">
-	<thead>
+<table class="table table-striped table-bordered table-sm">
+	<thead class="thead-dark">
 		<tr>
 			<th scope="col" style="width: 4em">Ranking</th>
 			<th scope="col">Athlete</th>
@@ -22,7 +22,7 @@
 		<th scope="row">{{ r.ranking }}</th>
 		<td><a href="{% url 'climbing:athlete' r.competitor.athlete.id %}">{{r.competitor.athlete}}</a></td>
 		{% for item in r.boulders %}
-			<td>{{ item }}</td>
+			<td {% if item == 'top' %} class="table-success"{%endif%}>{{ item |capfirst}}</td>
 		{% endfor %}
 		<td>{{ r.tops }}</td>
 		<td>{{ r.score|floatformat }}</td>
