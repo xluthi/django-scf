@@ -103,7 +103,7 @@ class ResultManager(models.Manager):
         except self.model.DoesNotExist:
             print("exception catched")
             r = Result()
-            r.result = 0
+            r.result = 10
             r.boulder = boulder
             r.competitor = competitor
             return r
@@ -113,7 +113,9 @@ class Result(models.Model):
         Each record represents a specific result for an athelete for a specific
         competition for a specific route
         """
+        # 10 means "no attempt yet"
         RESULTS = (
+            (10, ""),
             (0, "failure"),
             (1, "zone"),
             (2, "top")

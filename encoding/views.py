@@ -30,8 +30,11 @@ def encode(request, competition_id, competitor_id):
             'competitor': competitor,
             'error_message': 'Résultat invalide.',
         })
-
-    result,created  = Result.objects.update_or_create(competitor=competitor,
-        boulder=boulder, defaults={'result': result})
+    if result != 10:
+        result,created  = Result.objects.update_or_create(competitor=competitor,
+            boulder=boulder, defaults={'result': result})
+    else:
+        result = get_object_or_404(Result, competitor=competitor, boulder=boulder)
+        result.delete()
 
     return HttpResponseRedirect(reverse('encoding:competitor', args=(competition.id, competitor.id)))
