@@ -7,14 +7,16 @@
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
-      <th>Boulder</th>
-      <th>Résultat</th>
+      <th scope="col" style="width: 4em">ID</th>
+      <th scope="col">Boulder</th>
+      <th scope="col">Résultat</th>
     </tr>
   </thead>
   <tbody>
     {% for result in result_set %}
     <tr>
-      <td>{{ result.boulder }}</td>
+      <td>{{ result.boulder.number }}</td>
+      <td>{{ result.boulder.description }}</td>
       <td>
         <form action="{% url 'encoding:encode' competition.id competitor.id %}" method="post">
           {% csrf_token %}
