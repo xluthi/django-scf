@@ -101,7 +101,6 @@ class ResultManager(models.Manager):
         try:
             return self.get(competitor=competitor, boulder=boulder)
         except self.model.DoesNotExist:
-            print("exception catched")
             r = Result()
             r.result = 10
             r.boulder = boulder

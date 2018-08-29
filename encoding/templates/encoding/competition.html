@@ -6,8 +6,9 @@
 
 <div class="btn-group py-3" role="group">
   <a class="btn btn-primary" href="{% url 'encoding:list_boulders' competition.id %}" role="button">Encoder un bloc spécifique</a>
+  <a class="btn btn-info mx-3" href="{% url 'climbing:results' competition.id %}" role="button">Afficher le classement</a>
 </div>
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-sm table-bordered">
   <thead class="thead-dark">
     <tr>
       <th scope="col" style="width: 5em">Dossard</th>
@@ -23,7 +24,5 @@
     {% endfor %}
   </tbody>
 </table>
-
-<a class="btn btn-primary" href="{% url 'climbing:results' competition.id %}" role="button">Afficher le classement</a>
 
 {% endblock content %}
