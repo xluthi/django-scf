@@ -33,6 +33,9 @@ def results(request, competition_id):
     for category in categories:
         res_cat = []
         competitors = competition.competitor_set.filter(category=category.id)
+        if len(competitors) == 0:
+            # do not compture ranking if no competitor in this category
+            continue
         # compute result for each competitor
         for competitor in competitors:
             ra = {}
