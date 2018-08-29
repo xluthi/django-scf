@@ -49,7 +49,8 @@ def results(request, competition_id):
                     boulder_results.append(score)
                     if score == 'top':
                         tops += 1
-                        total_score += b.value(category)
+                        value = b.top_value / Result.objects.filter(boulder=b.id, result=2, competitor__category = category, competitor__athlete__gender=gender).count()
+                        total_score += value
                 ra['boulders'] = boulder_results
                 ra['tops'] = tops
                 ra['score'] = total_score
