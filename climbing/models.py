@@ -53,12 +53,12 @@ class Boulder(models.Model):
         return self.top_value / Result.objects.filter(boulder=self.id, result=2, competitor__category = category).count()
 
 class Club(models.Model):
-    name = models.CharField('Name', max_length=100)
+    name = models.CharField('Name', max_length=100, unique=True)
     city = models.CharField('City', max_length=100)
     gym  = models.CharField('Gym/sport hall', max_length=100)
 
     def __str__(self):
-        return "{} ({}, {})".format(self.name, self.gym, self.city)
+        return "{} ({})".format(self.name, self.city)
 
 class Athlete(models.Model):
     """
