@@ -9,7 +9,7 @@ class Category(models.Model):
     code = models.CharField("Code", max_length=3, unique=True)
     description = models.CharField("Description", max_length=50)
     def __str__(self):
-        return "{} - {}".format(self.code, self.description)
+        return self.description
     class Meta:
         verbose_name_plural = "Categories"
 
@@ -46,20 +46,19 @@ class Boulder(models.Model):
         ordering = ["number"]
         unique_together = ('competition', 'number')
 
-    @property
-    def value(self):
+    def value(self, category):
         """
         Based on the results, compute the value of the top
         """
-        return self.top_value / Result.objects.filter(boulder=self.id, result=2).count()
+        return self.top_value / Result.objects.filter(boulder=self.id, result=2, competitor__category = category).count()
 
 class Club(models.Model):
-    name = models.CharField('Name', max_length=100)
+    name = models.CharField('Name', max_length=100, unique=True)
     city = models.CharField('City', max_length=100)
     gym  = models.CharField('Gym/sport hall', max_length=100)
 
     def __str__(self):
-        return "{} ({}, {})".format(self.name, self.gym, self.city)
+        return "{} ({})".format(self.name, self.city)
 
 class Athlete(models.Model):
     """
@@ -93,17 +92,19 @@ class Competitor(models.Model):
 
     class Meta:
             unique_together = (('athlete', 'competition'), ('competition', 'dossard'))
+            ordering = ['competition', 'dossard']
     def __str__(self):
-        return "{}({}) {}".format(self.dossard, self.category, self.athlete)
+        return "{}   -   {}   -   ({})  --> {}".format(self.dossard, self.competition, self.category, self.athlete)
 
 class ResultManager(models.Manager):
     def get_result(self, competitor, boulder):
         try:
             return self.get(competitor=competitor, boulder=boulder)
         except self.model.DoesNotExist:
-            print("exception catched")
             r = Result()
-            r.result = 0
+            r.result = 10
+            r.boulder = boulder
+            r.competitor = competitor
             return r
 
 class Result(models.Model):
@@ -111,7 +112,9 @@ class Result(models.Model):
         Each record represents a specific result for an athelete for a specific
         competition for a specific route
         """
+        # 10 means "no attempt yet"
         RESULTS = (
+            (10, ""),
             (0, "failure"),
             (1, "zone"),
             (2, "top")
@@ -119,6 +122,9 @@ class Result(models.Model):
         competitor  = models.ForeignKey(Competitor, on_delete = models.PROTECT)
         boulder     = models.ForeignKey(Boulder, on_delete = models.PROTECT)
         result      = models.PositiveSmallIntegerField(choices=RESULTS)
+        datetime    = models.DateTimeField('attempt date', auto_now_add=True)
         def __str__(self):
             return "{}, boulder: {}, result: {}".format(self.competitor, self.boulder, self.result)
         objects = ResultManager()
+        class Meta:
+            unique_together = ('competitor', 'boulder')

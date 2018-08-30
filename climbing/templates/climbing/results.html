@@ -2,31 +2,37 @@
 {% block title %} {{ competition.title }} {% endblock title %}
 
 {% block content %}
-<table class="table table-striped table-bordered">
-	<thead>
+{% for res_cat in results %}
+<h2>{{ res_cat.category }}</h2>
+<table class="table table-striped table-bordered table-sm table-nonfluid">
+	<thead class="thead-dark">
 		<tr>
-			<th scope="col">Ranking</th>
-			<th scope="col">Athlete</th>
+			<th scope="col" class="text-center ranking">#</th>
+			<th scope="col" class="text-right score">Dossard</th>
+			<th scope="col" class="athlete">Athlete</th>
+			<th scope="col" class="score">Score</th>
+			<th scope="col" class="score">TOPS</th>
 			{% for b in competition.boulder_set.all %}
-			<th scope="col">{{ b.number }}</th>
+			<th scope="col" class="boulder text-center">{{ b.number }}</th>
 			{% endfor %}
-			<th scope="col">TOPS</th>
-			<th scope="col">Score</th>
 		</tr>
 	</thead>
 	<tbody>
-	{% for r in results %}
+	{% for r in res_cat.results %}
 	<tr>
-		<th scope="row">{{ r.ranking }}</th>
-		<td><a href="{% url 'climbing:athlete' r.competitor.id %}">{{r.competitor.athlete}}</a></td>
+		<th scope="row" class="text-center">{{ r.ranking }}</th>
+		<td class="text-center"><a href="{% url 'encoding:competitor' competition.id r.competitor.id %}">{{r.competitor.dossard}}</a></td>
+		<td><a href="{% url 'climbing:athlete' r.competitor.athlete.id %}">{{r.competitor.athlete}}</a></td>
+		<td class="text-right">{{ r.score|floatformat:1 }}</td>
+		<td class="text-center">{{ r.tops }}</td>
 		{% for item in r.boulders %}
-			<td>{{ item }}</td>
+			<td class="text-center {% if item == 'top' %} table-success{%endif%}">{{ item |capfirst|first}}</td>
 		{% endfor %}
-		<td>{{ r.tops }}</td>
-		<td>{{ r.score|floatformat }}</td>
 	</tr>
-	{% endfor %}
+	{% endfor %} {# res_cat #}
 	</tbody>
 </table>
+{% endfor %} {# results #}
 
-{% endblock %}
+<a class="btn btn-primary" href="{% url 'encoding:competition' competition.id %}" role="button">Encoder des résultats</a>
+{% endblock %} {# content #}

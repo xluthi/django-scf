@@ -6,3 +6,30 @@ body {
 h1, h2, h3, h4 {
   font-family: 'Lobster', cursive;
 }
+
+h2 {
+  margin-top: 1em;
+}
+
+nav.navbar-scf {
+  background-color: #1d1e19;
+  padding: 0rem 1rem;
+}
+
+th.boulder {
+  width: 2rem;
+}
+th.ranking {
+  width: 3rem;
+}
+
+th.score {
+  width: 4rem;
+}
+
+th.athlete {
+  width: 12rem;
+}
+.table-nonfluid {
+  width: auto !important;
+}

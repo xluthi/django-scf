@@ -1,0 +1,22 @@
+{% extends 'climbing/base.html' %}
+{% block title %} Encoder des résultats{% endblock title %}
+
+{% block content %}
+<h2><a href="{% url 'encoding:competition' competition.id %}">{{ competition }}</a></h2>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" style="width: 4em">ID</th>
+      <th scope="col">Bloc</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for boulder in competition.boulder_set.all %}
+    <tr>
+      <td><a class="btn btn-primary" href="{% url 'encoding:boulder' competition.id boulder.id %}" role="button">{{ boulder.id }}</a></td>
+      <td>{{ boulder }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}
