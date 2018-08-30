@@ -4,6 +4,10 @@ __pycache__
 # default database for any django project
 db.sqlite3
 
+# do not watch static files moved by the django.contrib.staticfiles app
+static/*
+
+
 # Specific for secret configuration parameters
 *.secret
 # backup, and autosave
