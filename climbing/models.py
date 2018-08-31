@@ -119,8 +119,8 @@ class Result(models.Model):
             (1, "zone"),
             (2, "top")
         )
-        competitor  = models.ForeignKey(Competitor, on_delete = models.PROTECT)
-        boulder     = models.ForeignKey(Boulder, on_delete = models.PROTECT)
+        competitor  = models.ForeignKey(Competitor, on_delete = models.CASCADE)
+        boulder     = models.ForeignKey(Boulder, on_delete = models.CASCADE)
         result      = models.PositiveSmallIntegerField(choices=RESULTS)
         datetime    = models.DateTimeField('attempt date', auto_now_add=True)
         def __str__(self):
