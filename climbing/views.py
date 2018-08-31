@@ -41,7 +41,7 @@ def results(request, competition_id):
             for competitor in competitors:
                 ra = {}
                 ra['competitor'] = competitor
-                tops = 0
+                tops, zones = (0, 0)
                 total_score = 0
                 boulder_results = []
                 for b in boulders:
@@ -51,8 +51,13 @@ def results(request, competition_id):
                         tops += 1
                         value = b.top_value / Result.objects.filter(boulder=b.id, result=2, competitor__category = category, competitor__athlete__gender=gender).count()
                         total_score += value
+                    if score == 'zone' or score == 'top':
+                        zones += 1
+                        value = b.zone_value / Result.objects.filter(boulder=b.id, result__in=[1,2], competitor__category = category, competitor__athlete__gender=gender).count()
+                        total_score += value
                 ra['boulders'] = boulder_results
                 ra['tops'] = tops
+                ra['zones'] = zones
                 ra['score'] = total_score
                 res_cat.append(ra)
                 res_cat.sort(key=lambda x: x['score'], reverse=True)
