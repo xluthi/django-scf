@@ -12,6 +12,7 @@
 			<th scope="col" class="athlete">Athlete</th>
 			<th scope="col" class="score">Score</th>
 			<th scope="col" class="score">TOPS</th>
+			<th scope="col" class="score">Zones</th>
 			{% for b in competition.boulder_set.all %}
 			<th scope="col" class="boulder text-center">{{ b.number }}</th>
 			{% endfor %}
@@ -25,6 +26,7 @@
 		<td><a href="{% url 'climbing:athlete' r.competitor.athlete.id %}">{{r.competitor.athlete}}</a></td>
 		<td class="text-right">{{ r.score|floatformat:1 }}</td>
 		<td class="text-center">{{ r.tops }}</td>
+		<td class="text-center">{{ r.zones }}</td>
 		{% for item in r.boulders %}
 			<td class="text-center {% if item == 'top' %} table-success{%endif%}">{{ item |capfirst|first}}</td>
 		{% endfor %}
