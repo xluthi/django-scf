@@ -37,6 +37,19 @@ def results(request, competition_id):
             if len(competitors) == 0:
                 # do not compture ranking if no competitor in this category
                 continue
+            # compute first every boulder value for this Category
+            for b in boulders:
+                try:
+                    b.computed_zone = b.zone_value / Result.objects.filter(boulder=b.id, result__in=[1,2], competitor__category = category, competitor__athlete__gender=gender).count()
+                except ZeroDivisionError:
+                    b.computed_zone = 0
+                    b.computed_top  = 0
+                    continue
+                try:
+                    b.computed_top  = b.top_value  / Result.objects.filter(boulder=b.id, result=2, competitor__category = category, competitor__athlete__gender=gender).count()
+                except ZeroDivisionError:
+                    b.computed_top = 0
+
             # compute result for each competitor
             for competitor in competitors:
                 ra = {}
@@ -49,12 +62,10 @@ def results(request, competition_id):
                     boulder_results.append(score)
                     if score == 'top':
                         tops += 1
-                        value = b.top_value / Result.objects.filter(boulder=b.id, result=2, competitor__category = category, competitor__athlete__gender=gender).count()
-                        total_score += value
+                        total_score += b.computed_top
                     if score == 'zone' or score == 'top':
                         zones += 1
-                        value = b.zone_value / Result.objects.filter(boulder=b.id, result__in=[1,2], competitor__category = category, competitor__athlete__gender=gender).count()
-                        total_score += value
+                        total_score += b.computed_zone
                 ra['boulders'] = boulder_results
                 ra['tops'] = tops
                 ra['zones'] = zones
