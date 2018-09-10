@@ -22,4 +22,5 @@ urlpatterns = [
     path('climbing/', include('climbing.urls')),
     path('encoding/', include('encoding.urls')),
     path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
 ]

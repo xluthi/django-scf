@@ -1,5 +1,5 @@
 from django.urls import path
-
+from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 
 app_name = 'climbing'
@@ -11,4 +11,9 @@ urlpatterns = [
     path('<int:competition_id>/encode/', views.encode, name='encode'),
     path('athletes/', views.athletes_index, name='athletes'),
     path('athlete/<int:athlete_id>/', views.athlete, name='athlete'),
+    path('results/', views.result_list),
+    path('results/<int:pk>/', views.result_detail),
 ]
+
+
+urlpatterns = format_suffix_patterns(urlpatterns)
