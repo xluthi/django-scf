@@ -18,17 +18,17 @@
 
 <body>
   <nav class="navbar navbar-expand-sm navbar-dark fixed-top navbar-scf">
-    <a class="navbar-brand" href="{% url 'climbing:index' %}">   <img src="{% static 'images/SCF.jpg' %}" width="40" height="40" alt="SCF"></a>
+    <a class="navbar-brand" href="{% url 'index' %}">   <img src="{% static 'images/SCF.jpg' %}" width="40" height="40" alt="SCF"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item {% if request.resolver_match.url_name == "index" %}active{%endif%}">
-          <a class="nav-link" href="{% url 'climbing:index' %}">Compétitions</a>
+          <a class="nav-link" href="{% url 'index' %}">Compétitions</a>
         </li>
         <li class="nav-item {% if request.resolver_match.url_name == "athletes" %}active{%endif%}">
-          <a class="nav-link" href="{% url 'climbing:athletes' %}">Athlètes</a>
+          <a class="nav-link" href="{% url 'athletes' %}">Athlètes</a>
         </li>
       </ul>
       <ul class="navbar-nav mr-0">
