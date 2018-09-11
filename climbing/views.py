@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Competition, Result, Athlete, Competitor
+from .models import Competition, Result, Athlete, Competitor, Club, Boulder, Category
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
@@ -7,8 +7,15 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import ResultSerializer, CompetitorSerializer, AthleteSerializer
+from .serializers import ResultSerializer, CompetitorSerializer, AthleteSerializer, ClubSerializer
 from rest_framework import generics
+
+class ClubList(generics.ListCreateAPIView):
+    queryset = Club.objects.all()
+    serializer_class = ClubSerializer
+class ClubDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Club.objects.all()
+    serializer_class = ClubSerializer
 
 class AthleteList(generics.ListCreateAPIView):
     queryset = Athlete.objects.all()
@@ -23,7 +30,7 @@ class CompetitorList(APIView):
     """
     def get(self, request, format=None):
         competitors = Competitor.objects.all()
-        serializer = CompetitorSerializer(competitors, many=True)
+        serializer = CompetitorSerializer(competitors, many=True, context={'request': request})
         return Response(serializer.data)
 
     def post(self, request, format=None):

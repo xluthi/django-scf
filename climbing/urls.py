@@ -16,7 +16,9 @@ urlpatterns = [
     path('competitors/', views.CompetitorList.as_view()),
     path('competitors/<int:pk>', views.CompetitorDetail.as_view()),
     path('athletes/', views.AthleteList.as_view()),
-    path('athletes/<int:pk>', views.AthleteDetail.as_view()),
+    path('athletes/<int:pk>', views.AthleteDetail.as_view(), name="athlete-detail"),
+    path('clubs/', views.ClubList.as_view()),
+    path('clubs/<int:pk>', views.ClubDetail.as_view(), name="club-detail"),
 ]
 
 
