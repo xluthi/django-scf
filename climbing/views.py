@@ -230,4 +230,4 @@ def encode(request, competition_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('climbing:results', args=(competition.id,)))
+        return HttpResponseRedirect(reverse('results', args=(competition.id,)))

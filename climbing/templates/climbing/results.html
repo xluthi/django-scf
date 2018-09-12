@@ -23,7 +23,7 @@
 	<tr>
 		<th scope="row" class="text-center">{{ r.ranking }}</th>
 		<td class="text-center"><a href="{% url 'encoding:competitor' competition.id r.competitor.id %}">{{r.competitor.dossard}}</a></td>
-		<td><a href="{% url 'climbing:athlete' r.competitor.athlete.id %}">{{r.competitor.athlete}}</a></td>
+		<td><a href="{% url 'athlete' r.competitor.athlete.id %}">{{r.competitor.athlete}}</a></td>
 		<td class="text-right">{{ r.score|floatformat:1 }}</td>
 		<td class="text-center">{{ r.tops }}</td>
 		<td class="text-center">{{ r.zones }}</td>

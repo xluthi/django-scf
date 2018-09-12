@@ -5,7 +5,7 @@
 {% for athlete in competition.athlete_set.all %}
 <h2>{{ athlete }}</h2>
 
-<form action="{% url 'climbing:encode' competition.id %}" method="post">
+<form action="{% url 'encode' competition.id %}" method="post">
 {% csrf_token %}
 	<input type="text" name="boulder" id="boulder" value="" />
 	<input type="text" name="result" id="result" value="" />
