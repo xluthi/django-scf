@@ -1,4 +1,4 @@
-"""tutorial URL Configuration
+"""Stone URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/topics/http/urls/
@@ -21,6 +21,7 @@ urlpatterns = [
     path('', RedirectView.as_view(url='climbing/', permanent=True)),
     path('climbing/', include('climbing.urls')),
     path('encoding/', include('encoding.urls')),
+    path('rest/',     include('restapi.urls')),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
 ]

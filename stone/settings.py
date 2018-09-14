@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['stone.luthi.be']
 INSTALLED_APPS = [
     'encoding.apps.EncodingConfig',
     'climbing.apps.ClimbingConfig',
+    'restapi.apps.RestapiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
