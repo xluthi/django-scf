@@ -4,7 +4,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from climbing.models import Competition, Result, Athlete, Competitor, Club, Boulder, Category
-from .serializers import ResultSerializer, CompetitorSerializer, AthleteSerializer, ClubSerializer
+from .serializers import ResultSerializer, CompetitorSerializer, AthleteSerializer, ClubSerializer, CompetitionSerializer
+
+class CompetitionList(generics.ListCreateAPIView):
+    queryset = Competition.objects.all()
+    serializer_class = CompetitionSerializer
+class CompetitionDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Competition.objects.all()
+    serializer_class = CompetitionSerializer
 
 class ClubList(generics.ListCreateAPIView):
     queryset = Club.objects.all()

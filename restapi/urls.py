@@ -11,6 +11,8 @@ urlpatterns = [
     path('athletes/<int:pk>', views.AthleteDetail.as_view(), name="athlete-detail"),
     path('clubs/', views.ClubList.as_view()),
     path('clubs/<int:pk>', views.ClubDetail.as_view(), name="club-detail"),
+    path('competitions/', views.CompetitionList.as_view()),
+    path('competitions/<int:pk>', views.CompetitionDetail.as_view(), name="competition-detail"),
 ]
 
 

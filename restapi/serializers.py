@@ -23,3 +23,8 @@ class ClubSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Club
         fields = ('url', 'name', 'city', 'gym')
+
+class CompetitionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Competition
+        fields = '__all__'
