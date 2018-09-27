@@ -52,9 +52,9 @@
 
   </main>
 
-  <script src="{% static 'js/jquery-3.3.1.slim.min.js' %}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"></script>
-  <script src="{% static 'js/popper.min.js' %}" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"></script>
-  <script src="{% static 'bootstrap/4.1.1/js/bootstrap.min.js' %}" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"></script>
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'bootstrap/4.1.1/js/bootstrap.min.js' %}"></script>
+  {% block javascript %}{%  endblock javascript %}
 </body>
 
 </html>
