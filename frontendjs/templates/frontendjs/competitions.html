@@ -1,0 +1,29 @@
+{% extends 'climbing/base.html' %}
+{% load staticfiles %}
+{% block title %} Compétitions {% endblock title %}
+
+{% block content %}
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Compétition</th>
+      <th>Date</th>
+      <th>Lieu</th>
+      <th>Catégories</th>
+    </tr>
+  </thead>
+  <tbody data-bind="foreach: competitions">
+    <tr>
+      <td><a href="#" data-bind="text: title, attr: {'href': '{% url 'competitions' %}' + pk()}"></a></td>
+      <td data-bind="text: date"></td>
+      <td data-bind="text: location"></td>
+      <td>nono</td>
+    </tr>
+  </tbody>
+</table>
+{% endblock content %}
+
+{% block javascript %}
+<script src="{% static 'knockout/knockout-3.4.2.js' %}"></script>
+<script src="{% static 'js/competitions.js' %}"></script>
+{% endblock javascript %}

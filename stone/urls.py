@@ -18,6 +18,7 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('', RedirectView.as_view(url='climbing/', permanent=True)),
     path('climbing/', include('climbing.urls')),
+    path('v2/',       include('frontendjs.urls')),
     path('encoding/', include('encoding.urls')),
     path('rest/',     include('restapi.urls')),
     path('admin/', admin.site.urls),
