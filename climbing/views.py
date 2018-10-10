@@ -40,65 +40,64 @@ def detail(request, competition_id):
 def results(request, competition_id):
     competition = get_object_or_404(Competition, pk=competition_id)
     categories = competition.categories.all()
-    boulders = competition.boulder_set.all()
     r = []
     # create a ranking for each category
     for category in categories:
-        for gender in ('F', 'M'):
-            res_cat = []
-            competitors = competition.competitor_set.filter(category=category.id, athlete__gender=gender)
-            if len(competitors) == 0:
-                # do not compture ranking if no competitor in this category
+        res_cat = []
+        competitors = competition.competitor_set.filter(category=category.id)
+        boulders = competition.boulder_set.filter(categories=category.id)
+        if len(competitors) == 0:
+            # do not compture ranking if no competitor in this category
+            continue
+        # compute first every boulder value for this Category
+        for b in boulders:
+            try:
+                b.computed_zone = b.zone_value / Result.objects.filter(boulder=b.id, result__in=[1,2], competitor__category = category).count()
+            except ZeroDivisionError:
+                b.computed_zone = 0
+                b.computed_top  = 0
                 continue
-            # compute first every boulder value for this Category
-            for b in boulders:
-                try:
-                    b.computed_zone = b.zone_value / Result.objects.filter(boulder=b.id, result__in=[1,2], competitor__category = category, competitor__athlete__gender=gender).count()
-                except ZeroDivisionError:
-                    b.computed_zone = 0
-                    b.computed_top  = 0
-                    continue
-                try:
-                    b.computed_top  = b.top_value  / Result.objects.filter(boulder=b.id, result=2, competitor__category = category, competitor__athlete__gender=gender).count()
-                except ZeroDivisionError:
-                    b.computed_top = 0
+            try:
+                b.computed_top  = b.top_value  / Result.objects.filter(boulder=b.id, result=2, competitor__category = category).count()
+            except ZeroDivisionError:
+                b.computed_top = 0
 
-            # compute result for each competitor
-            for competitor in competitors:
-                ra = {}
-                ra['competitor'] = competitor
-                tops, zones = (0, 0)
-                total_score = 0
-                boulder_results = []
-                for b in boulders:
-                    score = Result.objects.get_result(competitor=competitor, boulder=b).get_result_display()
-                    boulder_results.append(score)
-                    if score == 'top':
-                        tops += 1
-                        total_score += b.computed_top
-                    if score == 'zone' or score == 'top':
-                        zones += 1
-                        total_score += b.computed_zone
-                ra['boulders'] = boulder_results
-                ra['tops'] = tops
-                ra['zones'] = zones
-                ra['score'] = total_score
-                res_cat.append(ra)
-                res_cat.sort(key=lambda x: x['score'], reverse=True)
-                if len(res_cat) > 0: res_cat[0]['ranking'] = 1
-                for i in range(1,len(res_cat)):
-                    # define ranking, taking into account ex-aequo
-                    if res_cat[i]['score'] == res_cat[i-1]['score']:
-                        res_cat[i]['ranking'] = res_cat[i-1]['ranking']
-                    else:
-                        res_cat[i]['ranking'] = i+1
-            r.append({'category': "{} {}".format(category, gender), 'results': res_cat})
+        # compute result for each competitor
+        for competitor in competitors:
+            ra = {}
+            ra['competitor'] = competitor
+            tops, zones = (0, 0)
+            total_score = 0
+            boulder_results = []
+            for b in boulders:
+                score = Result.objects.get_result(competitor=competitor, boulder=b).get_result_display()
+                boulder_results.append(score)
+                if score == 'top':
+                    tops += 1
+                    total_score += b.computed_top
+                if score == 'zone' or score == 'top':
+                    zones += 1
+                    total_score += b.computed_zone
+            ra['boulders'] = boulder_results
+            ra['tops'] = tops
+            ra['zones'] = zones
+            ra['score'] = total_score
+            res_cat.append(ra)
+            res_cat.sort(key=lambda x: x['score'], reverse=True)
+            if len(res_cat) > 0: res_cat[0]['ranking'] = 1
+            for i in range(1,len(res_cat)):
+                # define ranking, taking into account ex-aequo
+                if res_cat[i]['score'] == res_cat[i-1]['score']:
+                    res_cat[i]['ranking'] = res_cat[i-1]['ranking']
+                else:
+                    res_cat[i]['ranking'] = i+1
+        r.append({'category': "{}".format(category), 'boulders': boulders, 'results': res_cat})
 
     context = {
-        'competition': competition,
-        'competitors'   : competitors,
-        'boulders'   : boulders,
-        'results'    : r,
+        'competition' : competition,
+        'competitors' : competitors,
+        'boulders'    : boulders,
+        'results'     : r,
     }
     return render(request, 'climbing/results.html', context)
 

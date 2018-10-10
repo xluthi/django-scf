@@ -10,7 +10,7 @@
 # GNU General Public License for more details.
 #
 # See LICENSE.txt for the full license text.
- 
+
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -18,13 +18,20 @@ MALE    = 'M'
 FEMALE  = 'F'
 GENDERS = ( (MALE, "male"), (FEMALE, "female") )
 
+class Gender(models.Model):
+    name = models.CharField("Name", max_length=30, unique=True)
+    def __str__(self):
+        return self.name
+
 class Category(models.Model):
     code = models.CharField("Code", max_length=3, unique=True)
     description = models.CharField("Description", max_length=50)
+    gender = models.ForeignKey(Gender, on_delete = models.PROTECT)
     def __str__(self):
         return self.description
     class Meta:
         verbose_name_plural = "Categories"
+        ordering = ['code']
 
 class Competition(models.Model):
     """
@@ -48,6 +55,7 @@ class Boulder(models.Model):
     top_value   = models.PositiveIntegerField('Value for top', default=1000)
     zone_value  = models.PositiveIntegerField('Value for zone', default=0)
     competition = models.ForeignKey(Competition, on_delete = models.CASCADE)
+    categories  = models.ManyToManyField(Category)
 
     @property
     def code(self):
@@ -82,7 +90,7 @@ class Athlete(models.Model):
     """
     lastname     = models.CharField('Lastname', max_length=100)
     firstname    = models.CharField('Firstname', max_length=100)
-    gender       = models.CharField('Gender', max_length=1, choices=GENDERS, default=MALE)
+    gender       = models.ForeignKey(Gender, on_delete=models.PROTECT)
     birthdate    = models.DateField('Birthdate')
     club         = models.ForeignKey(Club, on_delete=models.PROTECT, blank=True)
     nationality  = models.CharField('Nationality', max_length=3, default='BEL')
