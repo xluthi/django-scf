@@ -12,10 +12,9 @@
 # See LICENSE.txt for the full license text.
 
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Competition, Result, Athlete, Competitor
+from .models import Competition, Result, Athlete, Competitor, Club, Boulder, Category
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-
 
 def index(request):
     latest_competition_list = Competition.objects.order_by('-date')[:5]

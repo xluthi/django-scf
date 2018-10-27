@@ -33,12 +33,14 @@ ALLOWED_HOSTS = ['stone.luthi.be']
 INSTALLED_APPS = [
     'encoding.apps.EncodingConfig',
     'climbing.apps.ClimbingConfig',
+    'restapi.apps.RestapiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +127,13 @@ STATIC_ROOT = '/var/www/django-scf/static/'
 FIXTURE_DIRS = (
    os.path.join(BASE_DIR, 'stone/fixtures'),
 )
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    # ]
+    #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    #'PAGE_SIZE': 20
+}
