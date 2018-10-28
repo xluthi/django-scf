@@ -13,7 +13,7 @@
 			<th scope="col" class="score">Score</th>
 			<th scope="col" class="score">TOPS</th>
 			<th scope="col" class="score">Zones</th>
-			{% for b in competition.boulder_set.all %}
+			{% for b in res_cat.boulders %}
 			<th scope="col" class="boulder text-center">{{ b.number }}</th>
 			{% endfor %}
 		</tr>

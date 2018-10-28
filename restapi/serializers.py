@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from climbing.models import Competitor, Result, Athlete, Club, Category, Competition, Boulder
+from climbing.models import Competitor, Result, Athlete, Club, Category, Competition, Boulder, Gender
 from climbing.views import *
 
 class ResultSerializer(serializers.ModelSerializer):
@@ -14,7 +14,12 @@ class CompetitorSerializer(serializers.ModelSerializer):
         model = Competitor
         fields = ('id', 'athlete', 'competition', 'category', 'dossard', 'result_set')
 
-class AthleteSerializer(serializers.HyperlinkedModelSerializer):
+class GenderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Gender
+        fields = ('id', 'name')
+
+class AthleteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Athlete
         fields = ('url', 'lastname', 'firstname', 'gender', 'birthdate', 'club', 'nationality')

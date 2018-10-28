@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from climbing.models import Competition, Result, Athlete, Competitor, Club, Boulder, Category
+from climbing.models import Competition, Result, Athlete, Competitor, Club, Boulder, Category, Gender
 from .serializers import ResultSerializer, CompetitorSerializer, AthleteSerializer, ClubSerializer, CompetitionSerializer
 
 class CompetitionList(generics.ListCreateAPIView):
